@@ -12,6 +12,8 @@ import java.util.Locale;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.pdfbox.cos.COSDocument;
 import org.apache.pdfbox.pdfparser.PDFParser;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -20,12 +22,15 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
  * This class is used to perform various kinds of validations in the test cases.
  */
-public class Validations extends BasePage {
+public class Validations {
+
+	protected static Logger log = (Logger) LogManager.getLogger(Validations.class.getName());
 
 	/** testCaseStatus the status of the test case. */
 	boolean testCaseStatus = true;
@@ -121,7 +126,7 @@ public class Validations extends BasePage {
 	 *
 	 * @return path where screenshot has been saved
 	 */
-	public String screenShot() {
+	public String screenShot(WebDriver driver) {
 		String screenshotPath = "screenshot"
 				+ new SimpleDateFormat("MM-dd-yyyy-HH-mm-ss", Locale.FRANCE).format(new GregorianCalendar().getTime())
 				+ ".png";
@@ -226,7 +231,7 @@ public class Validations extends BasePage {
 	 * 
 	 * @param string URL
 	 */
-	public void checkChangedURL(String expectedURL) {
+	public void checkChangedURL(WebDriver driver, String expectedURL) {
 		String URL = driver.getCurrentUrl();
 		Assert.assertEquals(URL, expectedURL);
 	}

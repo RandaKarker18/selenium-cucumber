@@ -2,11 +2,11 @@ package com.automation.e2eTests.pageObjects;
 
 import java.time.Duration;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import com.automation.e2eTests.utils.BasePage;
 import com.automation.e2eTests.utils.ConfigFileReader;
 import com.automation.e2eTests.utils.SeleniumUtils;
 import com.automation.e2eTests.utils.Wait;
@@ -18,7 +18,7 @@ public class CreateTicketPage extends BasePage {
 
 	public CreateTicketPage() {
 		super();
-		seleniumUtils = new SeleniumUtils();
+		seleniumUtils = new SeleniumUtils(driver);
 		configFileReader = new ConfigFileReader();
 	}
 
@@ -46,20 +46,27 @@ public class CreateTicketPage extends BasePage {
 
 	public void waitForCreateTicketPageToLoad() {
 		Wait wait = new Wait(driver);
-		// wait.forLoading(Duration.ofSeconds(40));
 		wait.forElementToBeDisplayed(Duration.ofSeconds(40), newTicketLabel, "newTicket element");
 	}
 
 	public void fillRequiredFields() {
-		Wait.waitUntilClickable(driver, departementInput);
-		seleniumUtils.setValueWithJS(driver, departementInput, configFileReader.getProperties("ticket.departement"));
+		Wait.waitUntilClickable(driver, Duration.ofSeconds(20), departementInput);
+
+		// seleniumUtils.setValueWithJS(driver, departementInput,
+		// configFileReader.getProperties("ticket.departement"));
 		seleniumUtils.writeText(titreInput, configFileReader.getProperties("ticket.titre"));
 		seleniumUtils.writeText(descriptionInput, configFileReader.getProperties("ticket.description"));
 		seleniumUtils.setValueWithJS(driver, responsableInput, configFileReader.getProperties("ticket.responsabel"));
+//		responsableInput.click();
+//		responsableInput.sendKeys(configFileReader.getProperties("ticket.responsabel"));
+//		responsableInput.sendKeys(Keys.ENTER);
+		departementInput.click();
+		departementInput.sendKeys(configFileReader.getProperties("ticket.departement"));
+		departementInput.sendKeys(Keys.ENTER);
 	}
 
 	public void clearOneRequiredField() {
-		Wait.waitUntilClickable(driver, departementInput);
+		Wait.waitUntilClickable(driver, Duration.ofSeconds(20), departementInput);
 		seleniumUtils.writeText(departementInput, configFileReader.getProperties("ticket.departement"));
 		seleniumUtils.writeText(titreInput, configFileReader.getProperties("ticket.titre"));
 		seleniumUtils.writeText(descriptionInput, configFileReader.getProperties("ticket.description"));

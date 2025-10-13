@@ -4,7 +4,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import com.automation.e2eTests.utils.BasePage;
 import com.automation.e2eTests.utils.ConfigFileReader;
 import com.automation.e2eTests.utils.SeleniumUtils;
 
@@ -14,20 +13,20 @@ public class LoginPage extends BasePage {
 	private ConfigFileReader configFileReader;
 
 	@FindBy(how = How.ID, using = "sign-in-email-input")
-	private static WebElement userName;
+	private WebElement userName;
 
 	@FindBy(how = How.ID, using = "sign-in-password-input")
-	private static WebElement password;
+	private WebElement password;
 
 	@FindBy(id = "sign-in-button")
-	private static WebElement btnLogin;
+	private WebElement btnLogin;
 
 	@FindBy(id = "authentication-layout-title")
-	private static WebElement authenticationTitle;
+	private WebElement authenticationTitle;
 
 	public LoginPage() {
 		super();
-		seleniumUtils = new SeleniumUtils();
+		seleniumUtils = new SeleniumUtils(driver);
 		configFileReader = new ConfigFileReader();
 	}
 
@@ -48,22 +47,22 @@ public class LoginPage extends BasePage {
 	}
 
 	public void login() {
-		seleniumUtils.click(btnLogin);
+		seleniumUtils.safeClick(btnLogin);
 	}
 
-	public static WebElement getUserName() {
+	public WebElement getUserName() {
 		return userName;
 	}
 
-	public static WebElement getPassword() {
+	public WebElement getPassword() {
 		return password;
 	}
 
-	public static WebElement getBtnLogin() {
+	public WebElement getBtnLogin() {
 		return btnLogin;
 	}
 
-	public static WebElement getAuthenticationTitle() {
+	public WebElement getAuthenticationTitle() {
 		return authenticationTitle;
 	}
 

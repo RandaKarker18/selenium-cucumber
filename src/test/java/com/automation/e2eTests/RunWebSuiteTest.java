@@ -9,13 +9,15 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = { "src/spec/features" }, plugin = { "pretty", "html:target/report/cucumber-report.html",
-		"json:target/report/cucumber.json" }, tags = ("@addAgency_duplicate"),
+		"json:target/report/cucumber.json" }, tags = (""),
 		/*
 		 * glue = {"src/test/java/com/automation/e2eTests/StepDefinition" },
 		 */
 		/*
 		 * tags = ("@login_valid_credentials or @Logout"),@createTicket_valid
 		 * or @createTicket_invalid
+		 * 
+		 * @addAgency_duplicate
 		 */
 		monochrome = true, snippets = CAMELCASE)
 

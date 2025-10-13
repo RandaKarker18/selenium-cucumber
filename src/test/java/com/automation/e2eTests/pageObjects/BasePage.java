@@ -1,9 +1,11 @@
-package com.automation.e2eTests.utils;
+package com.automation.e2eTests.pageObjects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+
+import com.automation.e2eTests.utils.Setup;
 
 public class BasePage {
 

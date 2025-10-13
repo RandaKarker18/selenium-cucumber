@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import org.openqa.selenium.WebElement;
 
 public class UploadFile {
+
 	public void uploadFileWithSendKeys(String pathToFile, WebElement element) {
 		element.sendKeys(pathToFile);
 	}

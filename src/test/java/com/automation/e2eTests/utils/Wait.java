@@ -88,8 +88,8 @@ public class Wait {
 	 * @param webElement
 	 * @return web element
 	 */
-	public static WebElement waitUntilClickable(WebDriver driver, WebElement webElement) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+	public static WebElement waitUntilClickable(WebDriver driver, Duration duration, WebElement webElement) {
+		WebDriverWait wait = new WebDriverWait(driver, duration);
 		return wait.until(ExpectedConditions.elementToBeClickable(webElement));
 	}
 

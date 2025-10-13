@@ -13,6 +13,8 @@ import java.util.Properties;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -34,7 +36,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * on webelement. It is a repository so that same code need not to be written
  * again.
  */
-public class SeleniumUtils extends BasePage {
+public class SeleniumUtils {
+
+	private static Logger log = (Logger) LogManager.getLogger(SeleniumUtils.class.getName());
 
 	/** properties. */
 	protected Properties properties;
@@ -43,14 +47,13 @@ public class SeleniumUtils extends BasePage {
 	protected FileInputStream configFis;
 
 	/** driver. */
-	// private static WebDriver driver;
+	private WebDriver driver;
 
 	/**
 	 * Instanciation de common utils.
 	 */
-	public SeleniumUtils() {
-		super();
-		// SeleniumUtils.driver = Setup.getDriver();
+	public SeleniumUtils(WebDriver driver) {
+		this.driver = driver;
 	}
 
 	/**
@@ -138,6 +141,33 @@ public class SeleniumUtils extends BasePage {
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 		// WebElement webElement = driver.findElement(element);
 		jsExecutor.executeScript("arguments[0].click();", webElement);
+	}
+
+	public void safeClick(WebElement webElement) {
+		try {
+			webElement.click();
+			log.info("Nativ selenium click");
+			System.out.println("Nativ selenium click");
+		} catch (Exception exp) {
+
+			try {
+				Actions actions = new Actions(driver);
+				actions.moveToElement(webElement).click().perform();
+				log.info("Click by Actions (pour les éléments recouverts ou dynamiques)");
+				System.out.println("Click by Actions");
+			} catch (Exception e2) {
+				try {
+					JavascriptExecutor js = (JavascriptExecutor) driver;
+					js.executeScript("arguments[0].click();", webElement);
+					log.info("Click by JavaScript");
+					System.out.println("Click by JavaScript");
+				} catch (Exception e3) {
+					throw new RuntimeException("Impossible de cliquer sur l’élément : " + webElement, e3);
+				}
+			}
+
+		}
+
 	}
 
 	/**

@@ -55,11 +55,6 @@ public class AjouterAgenceStepDefinition {
 		agencyPage.addAgency();
 	}
 
-	@Then("une boite de dialogue d'erreur s'ouvre")
-	public void uneBoiteDeDialogueDErreurSOuvre() {
-
-	}
-
 	@Then("une boite de dialog d'erreur s'ouvre {string}")
 	public void uneBoiteDeDialogDErreurSOuvre(String expectedMsg) {
 		WebElement errorPopup = agencyPage.showErrorPopup();

@@ -17,6 +17,7 @@ public class LoginStepDefinition {
 	public LoginStepDefinition() {
 		loginPage = new LoginPage();
 		validation = new Validations();
+		homePage = new HomePage();
 	}
 
 	@Given("Je me connecte sur le site proservices")
@@ -38,7 +39,6 @@ public class LoginStepDefinition {
 	@When("Je clique sur le boutton se connecter")
 	public void jeCliqueSurLeBouttonSeConnecter() {
 		loginPage.login();
-		homePage = new HomePage();
 		homePage.waitForHomeToLoad();
 	}
 

@@ -8,13 +8,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 
-public class DateUtil extends BasePage {
+public class DateUtil {
 
-	public DateUtil() {
-		super();
-	}
+	private static Logger log = (Logger) LogManager.getLogger(DateUtil.class.getName());
 
 	// Get The Current Day
 	public static String getCurrentDay() {

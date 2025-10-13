@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import com.automation.e2eTests.utils.BasePage;
 import com.automation.e2eTests.utils.SeleniumUtils;
 import com.automation.e2eTests.utils.Wait;
 
@@ -16,7 +15,7 @@ public class HomePage extends BasePage {
 
 	public HomePage() {
 		super();
-		seleniumUtils = new SeleniumUtils();
+		seleniumUtils = new SeleniumUtils(driver);
 	}
 
 	@FindBy(how = How.ID, using = "SoftTyp3")
@@ -35,18 +34,15 @@ public class HomePage extends BasePage {
 
 	public void waitForHomeToLoad() {
 		Wait wait = new Wait(driver);
-		// wait.forLoading(Duration.ofSeconds(40));
 		wait.forElementToBeDisplayed(Duration.ofSeconds(40), totalTicketsText, "Total des tickets");
 	}
 
 	public void clickOnCreateTicketButton() {
-		seleniumUtils.clickOnElementUsingJs(btnCreateTicket);
+		seleniumUtils.safeClick(btnCreateTicket);
 	}
 
 	public void clickOnAgencyLink() {
-		seleniumUtils.clickOnElementUsingJs(agenciesLink);
-//		Wait wait = new Wait(driver);
-//		wait.forLoading(Duration.ofSeconds(20));
+		seleniumUtils.safeClick(agenciesLink);
 	}
 
 	public static WebElement getTotalTicketsText() {

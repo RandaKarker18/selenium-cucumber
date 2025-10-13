@@ -19,7 +19,7 @@ public class LogoutStepDefinition {
 
 	@When("Je clique sur le bouton Avatar")
 	public void jeCliqueSurLeBoutonAvatar() {
-		logoutPage.clickOnAvatarButton();
+		logoutPage.clickOnProfileButton();
 	}
 
 	@When("Je clique sur le bouton Deconnexion")
@@ -29,8 +29,9 @@ public class LogoutStepDefinition {
 
 	@Then("Je suis redirige vers la page de connexion {string}")
 	public void jeSuisRedirigeVersLaPageDeConnexion(String expectedTitle) {
+		LoginPage loginPage = new LoginPage();
 		if (expectedTitle != null && !expectedTitle.trim().isEmpty()) {
-			validation.assertEquals(LoginPage.getAuthenticationTitle(), expectedTitle);
+			validation.assertEquals(loginPage.getAuthenticationTitle(), expectedTitle);
 		}
 	}
 

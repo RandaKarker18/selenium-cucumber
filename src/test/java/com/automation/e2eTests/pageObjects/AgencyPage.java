@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import com.automation.e2eTests.utils.BasePage;
 import com.automation.e2eTests.utils.ConfigFileReader;
 import com.automation.e2eTests.utils.SeleniumUtils;
 import com.automation.e2eTests.utils.Wait;
@@ -21,7 +20,7 @@ public class AgencyPage extends BasePage {
 
 	public AgencyPage() {
 		super();
-		seleniumUtils = new SeleniumUtils();
+		seleniumUtils = new SeleniumUtils(driver);
 		configFileReader = new ConfigFileReader();
 	}
 
@@ -53,7 +52,7 @@ public class AgencyPage extends BasePage {
 	private WebElement btnOkerrorDiallog;
 
 	public void clickAddAgencyButton() {
-		seleniumUtils.click(addAgencyBtn);
+		seleniumUtils.safeClick(addAgencyBtn);
 		wait.forElementToBeDisplayed(Duration.ofSeconds(30), dialogTitle, "Add Agency Dialog");
 	}
 
@@ -71,21 +70,20 @@ public class AgencyPage extends BasePage {
 	}
 
 	public void addAgency() {
-		seleniumUtils.click(dialogBtnAdd);
+		seleniumUtils.safeClick(dialogBtnAdd);
 	}
 
 	public WebElement showErrorPopup() {
-
 		wait.forElementToBeDisplayed(Duration.ofSeconds(10), errorPopup, "Error Popup");
 		return errorMsg;
 	}
 
 	public void closeErrorPopup() {
-		seleniumUtils.click(btnOkerrorDiallog);
+		seleniumUtils.safeClick(btnOkerrorDiallog);
 	}
 
 	public void cancel() {
-		seleniumUtils.click(dialogBtnCancel);
+		seleniumUtils.safeClick(dialogBtnCancel);
 	}
 
 	public long isAgencyDuplicated() {
