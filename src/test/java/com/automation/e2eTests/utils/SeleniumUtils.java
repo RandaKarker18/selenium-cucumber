@@ -128,7 +128,7 @@ public class SeleniumUtils {
 	 */
 	public void doubleclickOnElementUsingActions(By element) {
 		Actions actions = new Actions(driver);
-		actions.moveToElement(Setup.getDriver().findElement(element));
+		actions.moveToElement(driver.findElement(element));
 		actions.doubleClick().perform();
 	}
 
@@ -196,7 +196,7 @@ public class SeleniumUtils {
 	 */
 	public WebElement findElement(By locator) {
 		try {
-			return Setup.getDriver().findElement(locator);
+			return driver.findElement(locator);
 		} catch (NoSuchElementException e) {
 			log.error(this.getClass().getName(), "findElement", "Element not found " + locator);
 			String message = e.getMessage();
@@ -214,7 +214,7 @@ public class SeleniumUtils {
 	 */
 	public List<WebElement> findElements(By locator) {
 		try {
-			return Setup.getDriver().findElements(locator);
+			return driver.findElements(locator);
 		} catch (NoSuchElementException e) {
 			log.error(this.getClass().getName(), "findElements", "element not found" + locator);
 			throw new NoSuchElementException(e.getMessage());
@@ -603,15 +603,15 @@ public class SeleniumUtils {
 	 * Switching Window.
 	 *
 	 */
-	public static void switchToWindow(String targetTitle) {
-		String origin = Setup.getDriver().getWindowHandle();
-		for (String handle : Setup.getDriver().getWindowHandles()) {
-			Setup.getDriver().switchTo().window(handle);
-			if (Setup.getDriver().getTitle().equals(targetTitle)) {
+	public void switchToWindow(String targetTitle) {
+		String origin = driver.getWindowHandle();
+		for (String handle : driver.getWindowHandles()) {
+			driver.switchTo().window(handle);
+			if (driver.getTitle().equals(targetTitle)) {
 				return;
 			}
 		}
-		Setup.getDriver().switchTo().window(origin);
+		driver.switchTo().window(origin);
 	}
 
 	/**
@@ -632,8 +632,8 @@ public class SeleniumUtils {
 	 * Returns the Text of the element given an element locator.
 	 *
 	 */
-	public static List<String> getElementsText(By locator) {
-		List<WebElement> elems = Setup.getDriver().findElements(locator);
+	public List<String> getElementsText(By locator) {
+		List<WebElement> elems = driver.findElements(locator);
 		List<String> elemTexts = new ArrayList<>();
 		for (WebElement el : elems) {
 			if (!el.getText().isEmpty()) {
