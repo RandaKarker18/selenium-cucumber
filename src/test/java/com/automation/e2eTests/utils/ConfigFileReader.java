@@ -32,7 +32,6 @@ public class ConfigFileReader {
 			System.out.println("Exception: ," + e);
 			throw new RuntimeException("Configuration.propertiesnot found at " + propertyFilePath);
 		} finally {
-			// this block will be executed in every case, success or caught exception
 			if (reader != null) {
 				try {
 					reader.close();

@@ -47,8 +47,7 @@ public class Validations {
 	 * Instanciation de assertions.
 	 */
 	public Validations() {
-		super();
-		// this.driver = Setup.getDriver();
+		// this.driver = driver;
 	}
 
 	/**
@@ -77,8 +76,8 @@ public class Validations {
 	 * @param targetElement element to be present
 	 * @return true if element is present else throws exception
 	 */
-	public Boolean isElementPresent(By targetElement) {
-		return Setup.getDriver().findElements(targetElement).size() > 0;
+	public Boolean isElementPresent(WebDriver driver, By targetElement) {
+		return driver.findElements(targetElement).size() > 0;
 	}
 
 	/**
@@ -117,8 +116,8 @@ public class Validations {
 	 * @param targetElement element not to be present
 	 * @return true if element is not present else throws exception
 	 */
-	public Boolean isElementNotPresent(By targetElement) {
-		return Setup.getDriver().findElements(targetElement).size() == 0;
+	public Boolean isElementNotPresent(WebDriver driver, By targetElement) {
+		return driver.findElements(targetElement).size() == 0;
 	}
 
 	/**
@@ -212,8 +211,8 @@ public class Validations {
 		}
 	}
 
-	public void checkUrlChange(String url) {
-		String actualUrl = Setup.getDriver().getCurrentUrl();
+	public void checkUrlChange(WebDriver driver, String url) {
+		String actualUrl = driver.getCurrentUrl();
 		if (actualUrl.equals(url)) {
 
 			log.info("The page did not change");
