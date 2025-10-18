@@ -225,6 +225,28 @@
 					<artifactId>maven-project-info-reports-plugin</artifactId>
 					<version>3.6.1</version>
 				</plugin>
+				
+				<plugin>
+            <groupId>net.masterthought</groupId>
+            <artifactId>maven-cucumber-reporting</artifactId>
+            <version>5.7.0</version> <!-- compatible avec Cucumber 7 -->
+            <executions>
+                <execution>
+                    <id>generate-cucumber-html-report</id>
+                    <phase>verify</phase>
+                    <goals>
+                        <goal>generate</goal>
+                    </goals>
+                    <configuration>
+                        <projectName>Automation Selenium</projectName>
+                        <outputDirectory>${project.build.directory}/report/cucumber-report.html</outputDirectory>
+                        <jsonFiles>
+                            <param>${project.build.directory}/report/cucumber.json</param>
+                        </jsonFiles>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
