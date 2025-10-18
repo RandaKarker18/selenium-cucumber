@@ -3,8 +3,7 @@ pipeline {
 
     environment {
         HOME_URL = 'https://adiat-front-formation.vercel.app'
-        HOME_USERNAME = credentials('home-creds')  // ID Jenkins pour username
-        HOME_PASSWORD = credentials('home-creds')  // ID Jenkins pour password
+        HOME_CREDENTIALS = credentials('home-creds')  // contient à la fois username et password
     }
 
     stages {
@@ -20,8 +19,8 @@ pipeline {
 
                 bat """
 echo home.url=%HOME_URL%> src\\test\\resources\\configs\\env-config.properties
-echo home.username=%HOME_USERNAME%>> src\\test\\resources\\configs\\env-config.properties
-echo home.password=%HOME_PASSWORD%>> src\\test\\resources\\configs\\env-config.properties
+echo home.username=%HOME_CREDENTIALS_USR%>> src\\test\\resources\\configs\\env-config.properties
+echo home.password=%HOME_CREDENTIALS_PSW%>> src\\test\\resources\\configs\\env-config.properties
 echo ticket.departement=MonDep>> src\\test\\resources\\configs\\env-config.properties
 echo ticket.titre=titre>> src\\test\\resources\\configs\\env-config.properties
 echo ticket.description=description>> src\\test\\resources\\configs\\env-config.properties
