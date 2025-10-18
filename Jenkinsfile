@@ -50,7 +50,7 @@ echo agency.duplicatename=selenium-cucumber>> src\\test\\resources\\configs\\env
             steps {
                 publishHTML(target: [
                     reportDir: 'target/report',
-                    reportFiles: 'overview-features.html',
+                    reportFiles: 'cucumber-report.html',
                     reportName: 'Cucumber Report'
                 ])
             }
